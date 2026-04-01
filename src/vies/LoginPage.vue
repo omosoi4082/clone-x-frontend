@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="logo-container">
+      <img src="@/assets/x-logo.png" class="logo" />
+    </div>
     <InputField
       :type="'text'"
       :placeholder="'Emil'"
@@ -12,10 +15,10 @@
       :model-value="password"
       v-model="password"
     />
-    <button class="login-button" @click="login">로그인하기</button>
+    <button class="button" @click="login">로그인하기</button>
     <div>
       계정이 없으신가요?
-      <span class="signup-button">가입하기</span>
+      <RouterLink class="signup-button" to="/signup">가입하기</RouterLink>
     </div>
   </div>
 </template>
@@ -40,16 +43,6 @@ export default {
 </script>
 
 <style scoped>
-.login-button {
-  border-radius: 20px;
-  border: 1px solid white;
-  font-size: 15px;
-  font-weight: bold;
-  margin: 10px 0px;
-  padding: 10px;
-  width: 100%;
-  cursor: pointer;
-}
 .signup-button {
   color: aqua;
   cursor: pointer;
