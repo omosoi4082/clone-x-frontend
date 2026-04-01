@@ -41,4 +41,9 @@ body {
   max-width: 60px;
   height: auto;
 }
+.error-messag {
+  color: red;
+  font-size: small;
+  width: 100%;
+}
 </style>

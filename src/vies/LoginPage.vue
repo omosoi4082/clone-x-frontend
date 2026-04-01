@@ -6,14 +6,14 @@
     <InputField
       :type="'text'"
       :placeholder="'Emil'"
-      :model-value="email"
       v-model="email"
+      :error-msg="'이메일을 입력하세요'"
     />
     <InputField
       :type="'password'"
       :placeholder="'Password'"
-      :model-value="password"
       v-model="password"
+      :error-msg="'비밀번호을 입력하세요'"
     />
     <button class="button" @click="login">로그인하기</button>
     <div>
