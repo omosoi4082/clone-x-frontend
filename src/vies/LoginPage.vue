@@ -25,6 +25,7 @@
 
 <script>
 import InputField from "@/components/InputField.vue";
+
 export default {
   name: "LoginPage",
   components: { InputField },
@@ -36,7 +37,7 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.email, this.password);
+      this.$router.push("/main");
     },
   },
 };
