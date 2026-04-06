@@ -2,7 +2,7 @@
   <div>
     <div class="title-container">
       <h2>Home</h2>
-      <div>User님</div>
+      <div>{{ userStore.userName }}님</div>
     </div>
     <TweetBar />
     <FeedList />
@@ -10,11 +10,17 @@
 </template>
 
 <script>
+import { useUserStore } from "@/store/UserStore";
 import FeedList from "@/components/FeedList.vue";
 import TweetBar from "@/components/TweetBar.vue";
 export default {
   name: "MainPage",
   components: { FeedList, TweetBar },
+  data() {
+    return {
+      userStore: useUserStore(),
+    };
+  },
 };
 </script>
 
