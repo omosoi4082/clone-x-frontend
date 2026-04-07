@@ -10,5 +10,8 @@ export const useFeedStore = defineStore("feedStore", {
     setFeed() {
       this.feedlsit = testData;
     },
+    removeFeed(id) {
+      this.feedlsit = this.feedlsit.filter((f) => f.id !== id);
+    },
   },
 });
