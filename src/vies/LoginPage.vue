@@ -24,20 +24,40 @@
 </template>
 
 <script>
+import { api } from "@/api";
 import InputField from "@/components/InputField.vue";
+import { useUserStore } from "@/store/UserStore";
 
 export default {
   name: "LoginPage",
   components: { InputField },
   data() {
     return {
+      userstore: useUserStore(),
       email: "",
       password: "",
     };
   },
   methods: {
-    login() {
-      this.$router.push("/main");
+    async login() {
+      if (!this.email || !this.password) {
+        alert("모든필드 입력하주세요");
+        return;
+      }
+
+      const payload = {
+        email: this.email,
+        password: this.password,
+      };
+      try {
+        const response = await api.post("/users/login", payload);
+        this.userstore.setUser(response.data);
+        this.userstore.saveToken(response.data.access_token);
+        this.$router.push("/main");
+      } catch (error) {
+        console.error("로그인 실패", error);
+        alert("로그인 실패");
+      }
     },
   },
 };

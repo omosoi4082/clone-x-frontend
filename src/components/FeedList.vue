@@ -17,7 +17,7 @@ export default {
     };
   },
   created() {
-    this.feedlists.setFeed();
+    this.feedlists.getFeedData();
   },
 };
 </script>

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import testData from "@/components/TestData";
+import { authApi } from "@/api";
 
 export const useFeedStore = defineStore("feedStore", {
   state: () => ({
@@ -7,11 +7,29 @@ export const useFeedStore = defineStore("feedStore", {
   }),
   getters: {},
   actions: {
-    setFeed() {
-      this.feedlsit = testData;
+    async getFeedData() {
+      try {
+        const response = await authApi.get("/feeds");
+        this.feedlsit = response.data;
+      } catch (error) {
+        console.log("error get feed:", error);
+      }
     },
-    removeFeed(id) {
-      this.feedlsit = this.feedlsit.filter((f) => f.id !== id);
+    async removeFeed(id) {
+      try {
+        await authApi.delete(`/feeds/${id}`); //->/feeds/1로 표기
+        this.getFeedData();
+      } catch (error) {
+        console.log("error remove feed:", error);
+      }
+    },
+    async addFeed(content) {
+      try {
+        await authApi.post("/feeds/", { content }); //->/feeds/1로 표기
+        this.getFeedData();
+      } catch (error) {
+        console.log("error add feed:", error);
+      }
     },
   },
 });

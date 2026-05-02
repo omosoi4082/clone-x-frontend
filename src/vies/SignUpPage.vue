@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { api } from "@/api";
 import InputField from "@/components/InputField.vue";
 export default {
   name: "SignUpPage",
@@ -46,6 +47,24 @@ export default {
       password: "",
       passwordConfirm: "",
     };
+  },
+  methods: {
+    async signUp() {
+      if (!this.email || !this.name || !this.password) {
+        alert("모든 필드 입력하주세요");
+        return;
+      }
+      try {
+        await api.post("/users", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        });
+        this.$router.push("/"); //->/ =메인페이지 이동
+      } catch (error) {
+        alert("회원가입 실패");
+      }
+    },
   },
   computed: {
     isPasswordMatch() {
